@@ -16,7 +16,9 @@ namespace dtcxamarin
         [JsonProperty("designer")]
         public string Designer { get; set; }
 
+        [JsonProperty("collections", ItemIsReference = true)]
         public List<Collection> Collections { get; set; }
+
         public Catalog()
         {
         }
@@ -35,33 +37,16 @@ namespace dtcxamarin
 
         private static Catalog FromJson(string json)
         {
-            /*JObject obj = JObject.Parse(json);
-            Catalog catalog = new Catalog();
-
-            var designer = obj.Property("designer");
-
-            catalog.Designer = (string)designer.Value[1];
-            Debug.WriteLine(string.Format("Designer: {0}", designer));
-
-            return catalog;
-            */
-            var catalog = JsonConvert.DeserializeObject<Catalog>(json);
-            Debug.WriteLine(string.Format("Catalog: {0}", catalog));
-            Debug.WriteLine(string.Format("Designer: {0}", catalog.Designer));
-
-            return catalog;
+            return JsonConvert.DeserializeObject<Catalog>(json);
         }
 
         public override string ToString()
         {
             StringBuilder buffer = new StringBuilder("");
 
-            if (Collections != null && Collections.Count > 0)
+            foreach (var collection in Collections)
             {
-                foreach (var collection in Collections)
-                {
-                    buffer.AppendFormat(" {0} ", collection.ToString());
-                }
+                buffer.AppendFormat(" {0} ", collection);
             }
 
             return string.Format("[Catalog: Designer={0}, Collections=[{1}]]", Designer, 

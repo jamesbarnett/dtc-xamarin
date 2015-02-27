@@ -14,7 +14,7 @@ namespace iOSUnitTests
         public void it_parses_catalog_json()
         {
             Catalog catalog = Catalog.Load();
-            //Debug.WriteLine(string.Format("Catalog: {0}", catalog.ToString()));
+            Debug.WriteLine(string.Format("Catalog: {0}", catalog));
         }
     }
 }

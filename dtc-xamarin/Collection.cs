@@ -17,15 +17,11 @@ namespace dtcxamarin
         [JsonProperty("image")]
         public string Image { get; set; }
 
+        [JsonProperty("pieces", ItemIsReference = true)]
         public List<Piece> Pieces { get; set; }
 
         public Collection()
         {
-        }
-
-        public static Collection FromJson(string json)
-        {
-            return new Collection();
         }
 
         public override string ToString()
@@ -34,9 +30,10 @@ namespace dtcxamarin
 
             foreach (Piece piece in Pieces)
             {
-                buffer.AppendFormat(" {0} ");
+                buffer.AppendFormat(" {0} ", piece);
             }
-            return string.Format("[Collection: Title={0}, Description={1}, Image={2}, Pieces={3}]",
+
+            return string.Format("[Collection: Title={0}, Description={1}, Image={2}, Pieces=[{3}]]",
                 Title, Description, Image, buffer.ToString());
         }
     }

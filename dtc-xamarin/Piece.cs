@@ -5,17 +5,17 @@ namespace dtcxamarin
 {
     public class Piece
     {
+        [JsonProperty("title")]
         public string Title { get; set; }
+
+        [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("image")]
         public string Image { get; set; }
 
         public Piece()
         {
-        }
-
-        public static Piece FromJson(string json)
-        {
-            return new Piece();
         }
 
         public override string ToString()
